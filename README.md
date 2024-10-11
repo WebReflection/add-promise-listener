@@ -11,10 +11,16 @@ addPromiseListener(
   button,
   'click',
   {
-    // optional: stopPropagation, stopImmediatePropagation or ...
+    // this is optionally needed to be sure the operation is performed
+    // when it's needed and not during the next tick:
+    // stopPropagation: true
+    // stopImmediatePropagation: true
     preventDefault: true,
     // optional signal to eventually catch rejections
     signal: ac.signal
+    // other standard options are allowed as well
+    // capture: true
+    // passive: true
   }
 ).then(
   event => {
