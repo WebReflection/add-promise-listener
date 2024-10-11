@@ -1,6 +1,6 @@
 {
   "name": "add-promise-listener",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -13,7 +13,10 @@
     "LICENSE",
     "README.md"
   ],
-  "keywords": ["promise", "listener"],
+  "keywords": [
+    "promise",
+    "listener"
+  ],
   "author": "Andrea Giammarchi",
   "license": "MIT",
   "description": "Using promises as generic event listener",
