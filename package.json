@@ -1,0 +1,28 @@
+{
+  "name": "add-promise-listener",
+  "version": "0.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo -e \"\\x1b[1mhttp://localhost:8080/test/\\x1b[0m ↗️\"; npx static-handler ."
+  },
+  "files": [
+    "index.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": ["promise", "listener"],
+  "author": "Andrea Giammarchi",
+  "license": "MIT",
+  "description": "Using promises as generic event listener",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebReflection/add-promise-listener.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WebReflection/add-promise-listener/issues"
+  },
+  "homepage": "https://github.com/WebReflection/add-promise-listener#readme"
+}
