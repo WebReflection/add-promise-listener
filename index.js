@@ -1,3 +1,4 @@
+const { defineProperty } = Object;
 const { get } = Reflect;
 
 const methods = [
@@ -5,6 +6,8 @@ const methods = [
   'stopPropagation',
   'stopImmediatePropagation',
 ];
+
+const once = { once: true };
 
 // avoid event.preventDefault throwing due illegal Proxy invocation
 const bound = (e, value) => typeof value === 'function' ? value.bind(e) : value;
@@ -31,17 +34,22 @@ class Handler {
  */
 export default (element, type, options = null) => new Promise(
   (resolve, reject) => {
-    if (options.signal)
-      options.signal.addEventListener('abort', reject);
+    const handler = new Handler(element);
+    if (options.signal) {
+      const abort = event => reject(new Proxy(event, handler));
+      options.signal.addEventListener('abort', abort, once);
+      if (options.signal.aborted)
+        return options.signal.dispatchEvent(new Event('abort'));
+    }
     element.addEventListener(
       type,
       (event) => {
         for (const method of methods) {
           if (options[method]) event[method]();
         }
-        resolve(new Proxy(event, new Handler(element)));
+        resolve(new Proxy(event, handler));
       },
-      { ...options, once: true }
+      { ...options, ...once }
     );
   }
 );

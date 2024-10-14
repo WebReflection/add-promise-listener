@@ -31,6 +31,7 @@ addPromiseListener(
     console.assert(event.defaultPrevented, 'defaultPrevented');
   },
   event => {
+    console.assert(event.currentTarget === button, 'currentTarget');
     console.error(event.target.reason);
   }
 );

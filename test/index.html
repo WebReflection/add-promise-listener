@@ -19,12 +19,21 @@
         console.assert(event.defaultPrevented, 'defaultPrevented');
         console.log(event.currentTarget, event.type);
       },
-      event => {
-        console.error(event.target.reason);
+      ({ currentTarget, target }) => {
+        console.assert(currentTarget === test, 'currentTarget');
+        console.error(currentTarget, target);
       }
     );
 
-    setTimeout(() => ac.abort('timeout!'), 5000);
+    setTimeout(() => {
+      ac.abort('timeout!');
+      // test already aborted signal
+      addPromiseListener(test, 'click', ac).catch(
+        ({ currentTarget, target }) => {
+          console.warn(currentTarget, target);
+        }
+      );
+    }, 5000);
   </script>
 </head>
 <body>
